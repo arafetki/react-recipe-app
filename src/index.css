@@ -42,3 +42,10 @@
   }
 
 }
+
+@layer components {
+  .p-rating-item-active{
+    @apply text-warning;
+  }
+
+}

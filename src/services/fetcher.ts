@@ -1,12 +1,11 @@
 import {axiosInstance} from './api'
-import axios,{ AxiosResponse,AxiosRequestConfig } from 'axios'
+import axios,{ AxiosResponse } from 'axios'
 
-const fetcher = async<T> (url: string, config?:AxiosRequestConfig) => {
+const fetcher = async<T> ([url,params]: [string,Record<string,string>]) => {
 
     try {
-
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const res: AxiosResponse<T,any> = await axiosInstance.get(url,config);
+        const res: AxiosResponse<T,any> = await axiosInstance.get(url,{params});
         return res.data;
 
     } catch (err) {

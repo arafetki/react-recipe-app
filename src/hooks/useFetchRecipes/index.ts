@@ -1,16 +1,20 @@
-import useSWR from "swr";
+import useSWR from "swr/immutable";
 import type { RecipesApiResponse } from "@/types";
 
-const useFetchRecipes = (offset: number = 1 ) => {
+const useFetchRecipes = (pageNum: number = 1 ) => {
 
-    const params = new URLSearchParams({ skip: offset.toString(), limit: "10"})
+    const params = {
+        skip: ((pageNum-1)*10).toString(),
+        limit: '10'
+    }
 
-    const {data,error,isLoading} = useSWR<RecipesApiResponse>(`/recipes?${params.toString()}`)
+    const {data,error,isLoading} = useSWR<RecipesApiResponse,Error>(['/recipes',params])
 
-    console.log(data)
+    const recipes = data?.recipes || [];
 
     return {
-        recipes: data?.recipes || [],
+        recipes,
+        total: data?.total || 0,
         error,
         isLoading,
     }

@@ -1,3 +1,5 @@
+type Theme = 'dark' | 'light';
+
 type Recipe = {
     id: number
     name: string
@@ -24,4 +26,7 @@ type RecipesApiResponse = {
     limit: number
 }
 
-export type {Recipe,RecipesApiResponse};
+
+
+
+export type {Theme,Recipe,RecipesApiResponse};

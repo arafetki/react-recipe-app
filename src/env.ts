@@ -4,8 +4,6 @@ const EnvSchema = z.object({
     API_BASE_URL: z.string().url()
 })
 
-
-
 const parsedEnv = EnvSchema.safeParse({API_BASE_URL: import.meta.env.VITE_API_BASE_URL});
 
 if (parsedEnv.error) {

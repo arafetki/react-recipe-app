@@ -1,8 +1,8 @@
-export default  function App() {
+export default function App() {
 
   return (
     <>
-      <h1>Movie App</h1>
+      <h1>Recipes Application</h1>
     </>
   )
 }

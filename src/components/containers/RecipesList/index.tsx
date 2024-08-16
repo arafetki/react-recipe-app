@@ -1,8 +1,9 @@
 import { useState } from "react"
 import { useFetchRecipes } from "@/hooks/useFetchRecipes"
 import {Pagination, Button} from "@nextui-org/react";
-
 import RecipeCard from "@/components/containers/RecipeCard"
+import { PAGE_SIZE } from "@/utils/const";
+
 
 export default function RecipesList(): JSX.Element {
 
@@ -10,7 +11,7 @@ export default function RecipesList(): JSX.Element {
     const {recipes,total,isLoading, error} = useFetchRecipes(currentPage)
     useFetchRecipes(currentPage+1) // Smooth ux while moving through pages
 
-    const totalPages = total/10;
+    const totalPages = Math.ceil(total/PAGE_SIZE);
     const isEnd = currentPage === totalPages;
 
     if (isLoading) return <span>Loading...</span>
@@ -48,6 +49,7 @@ export default function RecipesList(): JSX.Element {
                         variant="flat"
                         color="secondary"
                         onPress={() => setCurrentPage((prev) => (prev > 1 ? prev - 1 : prev))}
+                        disabled={currentPage===1}
                     >
                     Previous
                     </Button>
